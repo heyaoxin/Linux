@@ -1,0 +1,26 @@
+#install php5
+- name: install php5
+  yum:
+        name: php-fpm,php-mysql
+        state: latest
+- name: enable and start php
+  shell: 
+        systemctl enable php-fpm && systemctl start php-fpm
+#install php-7+
+#更改源
+#- name: install php-7
+#  yum:
+#       name: epel-release
+#       state: install
+#- name: xx
+#  shell
+#       rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm 
+#下载php相应的包
+#- name: install 7+
+#  yum
+#       name:php72w-mysqlnd,php72w-fpm
+#       state: install
+#- name: enable php7
+#  shell:
+#       systemctl enable php-fpm.service && systemctl start php-fpm.service
+#       

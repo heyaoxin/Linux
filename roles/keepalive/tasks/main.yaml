@@ -1,0 +1,18 @@
+##keepalive的配置都在脚本上，所以直接copy脚本到本地刷脚本就可以了
+- name: copy keepalive.conf.sh
+  copy:
+        src: /etc/ansible/roles/keepalive/files/vrrp_group_conf.sh
+        dest: ./vrrp_group_conf.sh
+- name: copy check_nginx.sh
+  copy:
+        src: /etc/ansible/roles/keepalive/files/check_nginx.sh
+        dest: /usr/local/src/check_nginx.sh
+
+#远程刷脚本
+- name: remote use sh
+  shell:
+        chmod +x ./vrrp_group_conf.sh && chmod +x /usr/local/src/check_nginx.sh
+- name: use vrrp_group_conf.sh
+  shell:
+        ./vrrp_group_conf.sh
+

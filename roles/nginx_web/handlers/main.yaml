@@ -1,0 +1,7 @@
+#定义触发器：
+#headers :
+#定义重启nginx
+- name: restart nginx
+  service: 
+        name: nginx
+        state: restarted

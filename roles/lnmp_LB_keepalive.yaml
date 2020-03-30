@@ -1,0 +1,21 @@
+#定义调用角色：
+- hosts: web  #执行该角色的主机清单
+  remote_user: root
+#调用nginx_web角色
+  roles:
+  - nginx_web
+  - php_install
+
+##一定要注意，另外的一个清单一定要放在另一个host里，不能在一个host放两个主机清单
+- hosts: web
+  remote_user: root
+#调用mysql_install角色
+  roles:
+  - mysql_install
+
+##配置nginx_LB和keepalive
+- hosts: lb
+  remote_user: root
+  roles:
+  - nginx_LB
+  - keepalive

@@ -1,0 +1,11 @@
+upstream websers{
+	server 192.168.126.135;
+	server 192.168.126.136; 
+}
+server{
+	listen 8090;
+	location /{
+		proxy_pass http://websers;
+	}	
+
+}

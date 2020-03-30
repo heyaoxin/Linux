@@ -1,0 +1,43 @@
+#tasks:
+#关闭防火墙
+- name: stop firewalld
+  shell: 
+        systemctl stop firewalld
+#关闭selinux
+- name: set selinux disabled
+  selinux:
+        state: disabled
+#开始下载nginx
+- name: install nginx
+  yum : 
+        name: nginx
+        state: latest
+# 设置nginx开机启动
+- name: enable nginx
+  shell:
+        systemctl enable nginx
+#配置nginx虚拟主机
+- name: config nginx web server
+  template: 
+        src: /etc/ansible/roles/nginx_web/templates/test_nginx_server.conf.j2
+        dest: /etc/nginx/conf.d/test_nginx_server.conf
+    #定义触发器，当配置文件修改后触发重启nginx   
+  notify: 
+  - restart nginx
+#拷贝测试页面到远程主机
+- name: copy test web to remote hosts
+  copy: 
+        src: /etc/ansible/roles/nginx_web/files/index.html
+        dest: /usr/share/nginx/html/index.html
+#启动nginx
+- name: start nginx
+  shell:
+          systemctl start nginx        
+
+
+
+
+
+
+
+
